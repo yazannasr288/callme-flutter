@@ -1,0 +1,89 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+build/
+
+# Coverage
+coverage/
+
+# Pub generated files
+**/.packages
+
+# Android
+.gradle/
+android/.gradle/
+android/local.properties
+android/.idea/
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/key.properties
+
+# Android signing / secrets
+*.jks
+*.keystore
+key.properties
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Runner/GeneratedPluginRegistrant.*
+
+# macOS
+macos/Pods/
+macos/Flutter/ephemeral/
+
+# Windows
+windows/flutter/ephemeral/
+
+# Linux
+linux/flutter/ephemeral/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Environment / local configuration
+.env
+.env.*
+!.env.example
+
+# Firebase / Google credentials
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Local secrets / credentials
+secrets/
+credentials/
+*.pem
+*.p12
+*.pfx
+*.crt
+
+# Generated native plugin files
+.flutter-plugins
+.flutter-plugins-dependencies
