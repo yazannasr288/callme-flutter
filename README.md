@@ -6,12 +6,10 @@ A Flutter mobile calling application built around a simple user directory and re
 
 ## Screenshots
 
-### Login
-![CallMe Login](screenshots/login-screen.png)
-
-### User Directory
-![CallMe Home](screenshots/home-screen.png)
-
+<p align="center">
+  <img src="screenshots/login-screen.png" width="300">
+  <img src="screenshots/home-screen.png" width="300">
+</p>
 ## Features
 
 - User sign-in with username and ID
