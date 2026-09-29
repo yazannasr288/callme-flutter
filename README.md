@@ -1,42 +1,72 @@
-# CallMe — Flutter Voice & Video Calling App
+CallMe — Flutter Voice & Video Calling App
 
-A Flutter mobile calling application built around a simple user directory and real-time voice/video calling.
+CallMe is a Flutter mobile application for discovering registered users and starting real-time voice or video calls through ZEGO UI Kit.
 
-> **Portfolio note:** The original backend URL included in the development version is no longer active. This repository uses placeholders for the backend URL and ZEGO credentials so private service credentials are not committed to GitHub.
+The project includes a Flutter client, a PHP backend integration for user registration and user listing, Firebase initialization, and ZEGO calling/signaling integration.
 
-## Screenshots
+Screenshots
 
 <p align="center">
   <img src="screenshots/login-screen.png" width="300">
   <img src="screenshots/home-screen.png" width="300">
 </p>
-## Features
 
-- User sign-in with username and ID
-- Persistent login state using `shared_preferences`
-- User directory with user IDs
-- One-tap voice calling
-- One-tap video calling
-- ZEGO UI Kit integration for calling and signaling
-- Firebase initialization support from the original project
-- Simple Arabic user interface
-- Clean, lightweight Flutter UI
+Features
 
-## Tech Stack
+User registration/sign-in using username and ID
 
-| Technology | Purpose |
-| --- | --- |
-| Flutter / Dart | Mobile application |
-| ZEGO UI Kit | Voice and video calling |
-| ZEGO Signaling | Call signaling |
-| Firebase Core | Firebase initialization |
-| Firebase Messaging | Messaging dependency included in the original project |
-| Shared Preferences | Local session persistence |
-| HTTP | Communication with the PHP backend |
+Persistent login state with Shared Preferences
 
-## Project Structure
+User directory loaded from the PHP backend
 
-```text
+One-tap voice calls
+
+One-tap video calls
+
+ZEGO UI Kit integration for calling and signaling
+
+Firebase initialization and Firebase Messaging dependency
+
+Arabic user interface
+
+Simple Flutter UI for authentication and user discovery
+
+Tech Stack
+
+Technology
+
+Purpose
+
+Flutter / Dart
+
+Mobile application
+
+ZEGO UI Kit
+
+Voice and video calling
+
+ZEGO Signaling Plugin
+
+Call signaling and invitations
+
+Firebase Core
+
+Firebase initialization
+
+Firebase Messaging
+
+Push-messaging dependency included in the project
+
+Shared Preferences
+
+Local login-state persistence
+
+HTTP
+
+Communication with the PHP backend
+
+Project Structure
+
 lib/
 ├── main.dart
 ├── login.dart
@@ -51,63 +81,102 @@ assets/
 screenshots/
 ├── login-screen.png
 └── home-screen.png
-```
 
-## Configuration
+android/
+ios/
+test/
 
-The original project uses three external integrations:
+How It Works
 
-1. A PHP backend for registering users and retrieving the user list.
-2. ZEGO App ID / App Sign for voice and video calling.
-3. Firebase configuration included by FlutterFire.
+The user enters a username and ID on the login screen.
 
-For GitHub safety, the ZEGO App Sign and the old backend address are not stored in this repository.
+The app stores the entered user information locally using Shared Preferences.
 
-### ZEGO configuration
+The app sends the user information to the PHP backend through signup.php.
 
-Run the app with:
+The home screen retrieves the available users through getuser.php.
 
-```bash
-flutter run   --dart-define=ZEGO_APP_ID=YOUR_ZEGO_APP_ID   --dart-define=ZEGO_APP_SIGN=YOUR_ZEGO_APP_SIGN   --dart-define=CALLME_API_BASE_URL=https://YOUR-BACKEND-DOMAIN/callme
-```
+The user can start a voice or video call using ZEGO.
 
-On Windows PowerShell, the same command can be written on one line:
+Logging out clears the local session and unregisters the ZEGO calling service.
 
-```powershell
-flutter run --dart-define=ZEGO_APP_ID=YOUR_ZEGO_APP_ID --dart-define=ZEGO_APP_SIGN=YOUR_ZEGO_APP_SIGN --dart-define=CALLME_API_BASE_URL=https://YOUR-BACKEND-DOMAIN/callme
-```
+Backend Integration
 
-## Backend API Expected by the Original App
+The current Flutter code communicates with these PHP endpoints:
 
-The Flutter code expects these endpoints under the configured base URL:
-
-```text
 POST /signup.php
 GET  /getuser.php
-```
 
-`signup.php` expects:
+signup.php
 
-```text
+The login screen sends:
+
 username
 id
-```
 
-The original application handled successful registration using the response `success` and an existing user using `exists`.
+The original client handles these backend responses:
 
-## Getting Started
+success
+exists
 
-```bash
+getuser.php
+
+The endpoint is expected to return a JSON array containing users with fields used by the app:
+
+user_name
+user_num
+
+Current status: The original hosted backend used during development is no longer active. The application therefore requires a replacement or reactivated PHP backend for server-backed login and user-list functionality.
+
+ZEGO Configuration
+
+ZEGO initialization is handled in lib/callservices.dart using values from lib/constant.dart.
+
+Before running the calling features, provide valid ZEGO credentials locally:
+
+class Constant {
+  static String appSign = "YOUR_ZEGO_APP_SIGN";
+  static int appId = YOUR_ZEGO_APP_ID;
+}
+
+Do not commit a real ZEGO App Sign to a public repository.
+
+Firebase
+
+Firebase is initialized from:
+
+lib/firebase_options.dart
+
+The project also includes firebase.json and the Firebase Messaging dependency.
+
+Firebase configuration is application-specific, so a fresh setup may require configuring the corresponding Firebase Android/iOS applications.
+
+Getting Started
+
+1. Install dependencies
+
 flutter pub get
+
+2. Configure services
+
+Before running the complete application:
+
+Set valid ZEGO App ID and App Sign in your local configuration.
+
+Provide an active PHP backend implementing the expected endpoints.
+
+Configure Firebase for the target platform when required.
+
+3. Run the application
+
 flutter run
-```
 
-Before a fully functional calling session, configure valid ZEGO credentials and an active backend.
+Project Status
 
-## Project Status
+The Flutter client, UI, ZEGO integration, and backend integration are included for portfolio and demonstration purposes.
 
-The UI and Flutter client are suitable for portfolio presentation and screenshots. The original hosted backend is no longer active, so server-backed features require a replacement backend or a reactivated deployment.
+The original PHP hosting used during development is no longer active, so the server-dependent parts of the application require a replacement backend. Voice and video calling also require valid ZEGO credentials.
 
-## License
+License
 
-This project is released under the MIT License. See [LICENSE](LICENSE).
+This project is released under the MIT License. See LICENSE.
